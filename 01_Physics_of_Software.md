@@ -1,6 +1,8 @@
 # Physics of Software
 
-It's all about **latency, bandwidth and cost**. Without understanding the hardware, abstractions will eventually leak and the system will fail.
+https://www.youtube.com/watch?v=dDOKu20juEc
+
+It's all about **latency, bandwidth and cost**. Without understanding the hardware, abstractions will eventually leak, and the system will fail.
 
 ## Latency Hierarchy
 
@@ -71,7 +73,9 @@ Bandwidth = how many units you can move from point A to B
 
 ## Little's Law
 
-```L = λ * W```  
+\[
+\ L = \lambda  W
+\]
 Where:
 * L = in-flight requests. Long-term average number of items in a *stable* system.
 * λ = arrival rate. Long-term average *effective* arrival rate.
@@ -89,12 +93,16 @@ A system is stable if `λ < μ`.
 **Unstable systems don't fail gradually. They hit a wall.**
 
 Utilization:  
-`ρ = λ / μ`  
+\[
+\rho = \frac{\lambda}{\mu}
+\]
 > If λ = 10 requests/sec, N = 5 workers, and S = 0.4 sec, then μ = 5/0.4 = 12.5 req/sec, and ρ = 10/12.5 = 0.8 (80% utilized).  
 > The system remains stable as long as λ < μ, i.e., ρ < 1.  
 
 This can also be interpreted as the probability that the server is busy. With this we can also get the expected latency:  
-`W = S / (1 - ρ)`  
+\[
+\ W = \frac{S}{1-\rho}
+\]
 which says:
 * At low utilization (ρ → 0): W ≈ S, latency is just the service time itself, no waiting.
 * At high utilization (ρ → 1): W → ∞, latency blows up as the queue backs up.  
