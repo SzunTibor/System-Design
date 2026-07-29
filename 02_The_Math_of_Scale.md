@@ -56,7 +56,7 @@ Variance is the enemy. A low P50 can be a vanity metric if the P99 is terrible. 
 
 ## Throughput, Latency and the "Queuing Delay Explosion"
 
-Throughput and Latency are friendsm until the system gets crowded. Then they become bitter enemies.
+Throughput and Latency are friends, until the system gets crowded. Then they become bitter enemies.
 > You have to decide: are you building a Ferrari (low latency) or a bus (high throughput)? Optimizing for both simultaneously is the classic engineerinng trade-off. Don't let marketing fool you into thinking you can have it all without consequence.
 
 * **Tha Happy Zone (0-70% Utilization):**  
@@ -75,13 +75,25 @@ The speedup of a task is limited by it's serial fraction.
 
 Where
 \[
-\text{s} = \text{the fraction of the task that must be done } \textbf{serially.}
+\ s = \text{the fraction of the task that must be done } \textbf{serially.}
 \]  
 \[
 \text{n} = \text{the number of processors you throw at the problem}
 \]
 
-As 'n' (processors) gets infinitely large, the '(1-s)/n' term goes to zero. It converges to Max Speedup = **1/s**. This is the ultimate speed limit no matter how much money we spend.  
+Note, that
+\[
+\text{Max Speedup} = \frac{1}{(1-p)+\frac{p}{n}}
+\]
+
+Where
+\[
+\ p = \text{the fraction of the task that can be done parallel}
+\]
+
+Also true.
+
+As `n` (processors) gets infinitely large, the `(1-s)/n` term goes to zero. It converges to Max Speedup = **1/s**. This is the ultimate speed limit no matter how much money we spend.  
 
 > If your code is 95% parallelizable but 5% must be serial (e.g., a single database lock), even with infinite processors the maximum speedup is 1 / 0.05 = 20
 
